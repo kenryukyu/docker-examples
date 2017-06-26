@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  my-app-container:
+    build: .
+    image: my-app-image
+    ports:
+      - "5002:5002"
+    links:
+      - database-container
+
+  database-container:
+    image: mysql:5.7
+    ports:
+      - "5003:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
